@@ -1,0 +1,43 @@
+environment: 'dev'
+
+dev:
+    name: 'MVC'
+    description: 'App Sederhana'
+    url: 'http://localhost/webdev/public/'
+    database:
+        username: 'root'
+        password: ''
+        name: 'inventory'
+        host: 'localhost'
+        type: 'mysql'
+    debug: true
+    twig:
+        cache: false
+    salt: '8dezY!2deH'
+    mail:
+        from: 'root@root.com'
+        host: 'localhost'
+        username: null
+        password: null
+        port: 1025
+
+prod:
+    name: 'MVC'
+    description: 'App Sederhana'
+    url: 'http://localhost/webdev/public/'
+    database:
+        username: 'root'
+        password: ''
+        name: 'inventory'
+        host: 'localhost'
+        type: 'mysql'
+    debug: false
+    twig:
+        cache: false
+    salt: '8dezY!2deH'
+    mail:
+        from: 'root@root.com'
+        host: 'localhost'
+        username: null
+        password: null
+        port: 1025
