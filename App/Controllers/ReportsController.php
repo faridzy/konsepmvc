@@ -16,8 +16,8 @@ class ReportsController extends Controller {
         $data  = $model->all();
 
         $this->render('pages/admin/reports.twig', [
-            'title'       => 'Reports',
-            'description' => 'Reports - Just a simple inventory management system.',
+            'title'       => 'Laporan',
+            'description' => 'Laporan - Inventory Sederhana',
             'page'        => 'reports',
             'reports'  => $data
         ]);
@@ -27,7 +27,7 @@ class ReportsController extends Controller {
         if(!empty($_POST)) {
             $title     = isset($_POST['title']) ? $_POST['title'] : '';
             $validator = new ValidasiForm();
-            $validator->notEmpty('title', $title, "Your title must not be empty");
+            $validator->notEmpty('title', $title, "Title tidak boleh kosong");
 
             if($validator->isValid()) {
                 $model = new ReportsModel();
@@ -49,7 +49,7 @@ class ReportsController extends Controller {
                 $mailer = new Mailer();
                 $mailer->setFrom(Pengaturan::getKonfigurasi()['mail']['from'], 'Mailer');
                 $mailer->addAddress($_SESSION['email']);
-                $mailer->Subject = 'Hello ' . $_SESSION['auth'] . ', your report is ready!';
+                $mailer->Subject = 'Hello ' . $_SESSION['auth'] . ', laporan sudah siap!';
                 $mailer->msgHTML($content);
                 $mailer->send();
 
@@ -58,8 +58,8 @@ class ReportsController extends Controller {
 
             else {
                 $this->render('pages/admin/reports_add.twig', [
-                    'title'       => 'Add report',
-                    'description' => 'Reports - Just a simple inventory management system.',
+                    'title'       => 'Tambah laporan',
+                    'description' => 'Laporan - Inventory Sederhana',
                     'page'        => 'reports',
                     'errors'      => $validator->getErrors(),
                     'data'        => [
@@ -71,8 +71,8 @@ class ReportsController extends Controller {
 
         else {
             $this->render('pages/admin/reports_add.twig', [
-                'title'       => 'Add report',
-                'description' => 'Reports - Just a simple inventory management system.',
+                'title'       => 'Tambah Laporan',
+                'description' => 'Laporan - Inventory Sederhana',
                 'page'        => 'reports'
             ]);
         }
@@ -92,8 +92,8 @@ class ReportsController extends Controller {
             $model = new ReportsModel();
             $data = $model->find($id);
             $this->render('pages/admin/reports_delete.twig', [
-                'title'       => 'Delete report',
-                'description' => 'Reports - Just a simple inventory management system.',
+                'title'       => 'Delete laporan',
+                'description' => 'Laporan - Inventory Sederhana',
                 'page'        => 'reports',
                 'data'        => $data
             ]);
