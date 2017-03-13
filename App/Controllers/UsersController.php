@@ -15,8 +15,8 @@ class UsersController extends Controller {
         $data  = $model->all();
 
         $this->render('pages/admin/users.twig', [
-            'title'       => 'Users',
-            'description' => 'Users - Just a simple inventory management system.',
+            'title'       => 'User',
+            'description' => 'User - Inventori Sederhana',
             'page'        => 'users',
             'users'    => $data
         ]);
@@ -30,10 +30,10 @@ class UsersController extends Controller {
             $password_verification = isset($_POST['password_verification']) ? $_POST['password_verification'] : '';
 
             $validator = new ValidasiForm();
-            $validator->validUsername('username', $username, "Your username is not valid (no spaces, uppercase, special character)");
-            $validator->availableUsername('username', $username, "Your username is not available");
-            $validator->validEmail('email', $email, "Your email is not valid");
-            $validator->validPassword('password', $password, $password_verification, "You didn't write the same password twice");
+            $validator->validUsername('username', $username, "Username tidak valid");
+            $validator->availableUsername('username', $username, "Username tidak diperbolehkan");
+            $validator->validEmail('email', $email, "Email tidak valid");
+            $validator->validPassword('password', $password, $password_verification, "Tidak boleh menulis password yang sama/password tidak sama");
 
             if($validator->isValid()) {
                 $model = new UsersModel();
@@ -54,7 +54,7 @@ class UsersController extends Controller {
                 $mailer = new Mailer();
                 $mailer->setFrom(Pengaturan::getKonfigurasi()['mail']['from'], 'Mailer');
                 $mailer->addAddress($email);
-                $mailer->Subject = 'Hello ' . $username . ', welcome on board!';
+                $mailer->Subject = 'Hello ' . $username . ', Selamat Datang';
                 $mailer->msgHTML($content);
                 $mailer->send();
 
@@ -64,7 +64,7 @@ class UsersController extends Controller {
             else {
                 $this->render('pages/admin/users_add.twig', [
                     'title'       => 'Add user',
-                    'description' => 'Users - Just a simple inventory management system.',
+                    'description' => 'User - Inventory Sederhana',
                     'page'        => 'users',
                     'errors'      => $validator->getErrors(),
                     'data'        => [
@@ -77,8 +77,8 @@ class UsersController extends Controller {
 
         else {
             $this->render('pages/admin/users_add.twig', [
-                'title'       => 'Add user',
-                'description' => 'Users - Just a simple inventory management system.',
+                'title'       => 'Tambah user',
+                'description' => 'User - Inventory Sederhana',
                 'page'        => 'users'
             ]);
         }
@@ -90,8 +90,8 @@ class UsersController extends Controller {
             $email    = isset($_POST['email']) ? $_POST['email'] : '';
 
             $validator = new FormValidator();
-            $validator->validUsername('username', $username, "Your username is not valid (no spaces, uppercase, special character)");
-            $validator->validEmail('email', $email, "Your email is not valid");
+            $validator->validUsername('username', $username, "Username tidak valid");
+            $validator->validEmail('email', $email, "email tidak valid");
 
             if($validator->isValid()) {
                 $model = new UsersModel();
@@ -113,7 +113,7 @@ class UsersController extends Controller {
             else {
                 $this->render('pages/admin/users_edit.twig', [
                     'title'       => 'Edit user',
-                    'description' => 'Users - Just a simple inventory management system.',
+                    'description' => 'User - Inventory Sederhana',
                     'page'        => 'users',
                     'errors'      => $validator->getErrors(),
                     'data'        => [
@@ -130,7 +130,7 @@ class UsersController extends Controller {
 
             $this->render('pages/admin/users_edit.twig', [
                 'title'       => 'Edit user',
-                'description' => 'Users - Just a simple inventory management system.',
+                'description' => 'User - Inventory Sederhana.',
                 'page'        => 'users',
                 'data'        => $data
             ]);
@@ -149,8 +149,8 @@ class UsersController extends Controller {
             $model = new UsersModel();
             $data = $model->find($id);
             $this->render('pages/admin/users_delete.twig', [
-                'title'       => 'Delete user',
-                'description' => 'Users - Just a simple inventory management system.',
+                'title'       => 'Hapus user',
+                'description' => 'User - Inventory Sederhana',
                 'page'        => 'users',
                 'data'        => $data
             ]);
